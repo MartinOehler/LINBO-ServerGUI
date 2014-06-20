@@ -1,0 +1,82 @@
+{% load dajaxice_templatetags %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+   <head>
+      <title>LINBO</title>
+      <link rel="stylesheet" href="{{ MEDIA_URL }}css/foundation.css">
+      <script src="{{ MEDIA_URL }}js/vendor/custom.modernizr.js"></script>
+      <script src="{{ STATIC_URL }}dajaxice.core.js"  type="text/javascript" charset="utf-8"></script>
+      <script src="{{ MEDIA_URL }}js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+      <script src="{{ MEDIA_URL }}js/jquery.dajax.core.js" type="text/javascript" charset="utf-8"></script>
+    
+      <script type="text/javascript" src="{{ MEDIA_URL }}js/linboserver_client.js"></script>
+   </head>
+   <body>
+     <table>
+
+
+
+       <tr>
+	 <td>
+	   <table>
+	     {% include "sidebar.html" %}
+	   </table>
+	 </td>
+
+	 <script type="text/javascript">
+	   Dajaxice.linboweb.linboserver.displayclienteditor(Dajax.process);
+	 </script>
+
+	 <td>
+	   <table>
+	     <tr>
+               <td>
+		 <h1 class="boxmain">Client Configuration</h1>
+
+		 <form action="" method="post" id="clientform" onSubmit="return save_changes();"> 
+
+		   <div id="editor" name="editor">
+		     {% include "client_div.html" %}
+		   </div> 
+		   <input class="small button round" name="Save" type="submit" value="Speichern" id="savebutton">     
+		 </form>
+               </td>
+	     </tr>
+	   </table>
+	 </td>
+       </tr>
+     </table>
+
+     <script>
+      document.write('<script src=' +
+                              ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+                              '.js><\/script>')
+     </script>
+      
+     <script src="{{ MEDIA_URL }}js/foundation.min.js"></script>
+      <!--   
+          <script src="js/foundation/foundation.js"></script>
+          <script src="js/foundation/foundation.alerts.js"></script>
+          <script src="js/foundation/foundation.clearing.js"></script>
+          <script src="js/foundation/foundation.cookie.js"></script>
+          <script src="js/foundation/foundation.dropdown.js"></script>
+          <script src="js/foundation/foundation.forms.js"></script>
+          <script src="js/foundation/foundation.joyride.js"></script>
+          <script src="js/foundation/foundation.magellan.js"></script>
+          <script src="js/foundation/foundation.orbit.js"></script>
+          <script src="js/foundation/foundation.reveal.js"></script>
+          <script src="js/foundation/foundation.section.js"></script>
+          <script src="js/foundation/foundation.tooltips.js"></script>
+          <script src="js/foundation/foundation.topbar.js"></script>
+          <script src="js/foundation/foundation.interchange.js"></script>
+          <script src="js/foundation/foundation.placeholder.js"></script>
+          <script src="js/foundation/foundation.abide.js"></script>
+          
+          -->
+      
+     <script>
+        $(document).foundation();
+     </script>
+   </body>
+</html>

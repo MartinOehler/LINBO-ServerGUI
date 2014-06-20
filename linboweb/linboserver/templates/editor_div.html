@@ -1,0 +1,116 @@
+{% for bool in partitionSelectionAdminVisible %}
+<h6>Edit Partition Selections</h6>
+<div class="row">
+  <div class="large-4 columns">
+    <select class="medium" name="partitionselectionselector" id="partitionselectionselector" onchange="Dajaxice.linboweb.linboserver.partitionSelectionChanged(Dajax.process, {'selection':this.value});" size="1">
+      <option value="">Select...</option>
+      <option value="New">New Partitionselection</option>
+      {% for partitionselection in partitionSelections %}
+      <option value="{{ partitionselection.name }}">{{ partitionselection.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div id="partitionselectiondiv" name="partitionselectiondiv">
+  {% include "partitionselection_div.html" %}
+</div>
+{% endfor %}
+
+{% for bool in vmAdminVisible %}
+<h6>Edit virtual Machines</h6>
+<div class="row">
+  <div class="large-4 columns">
+    <select class="medium" name="vmselector" id="vmselector" onchange="Dajaxice.linboweb.linboserver.vmSelectionChanged(Dajax.process, {'selection':this.value});" size="1">
+      <option value="">Select...</option>
+      <option value="New">New VM</option>
+      {% for vm in vms %}
+      <option value="{{ vm.name }}">{{ vm.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div id="vmdiv" name="vmdiv">
+  {% include "vm_div.html" %}
+</div>
+{% endfor %}
+
+
+{% for bool in clientGroupAdminVisible %}
+<h6>Edit Client Groups</h6>
+<div class="row">
+  <div class="large-4 columns">
+    <select name="clientGroupselector" id="clientGroupselector" onchange="Dajaxice.linboweb.linboserver.clientGroupSelectionChanged(Dajax.process, {'selection':this.value});" size="1">
+      <option value="">Select...</option>
+      <option value="New">New Client Group</option>
+      {% for clientGroup in clientGroups %}
+      <option value="{{ clientGroup.name }}">{{ clientGroup.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>  
+<div id="clientGroupdiv" name="clientGroupdiv">
+  {% include "clientgroup_div.html" %}
+</div>
+{% endfor %}
+
+
+{% for bool in osAdminVisible %}
+<h6>Edit Operating Systems</h6>
+<div class="row">
+  <div class="large-4 columns">
+    <select class="medium" name="osselector" id="osselector" onchange="Dajaxice.linboweb.linboserver.osSelectionChanged(Dajax.process, {'selection':this.value});" size="1">
+      <option value="">Select...</option>
+      <option value="New">New Operating System</option>
+      {% for os in oss %}
+      <option value="{{ os.name }}">{{ os.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div id="osdiv" name="osdiv">
+  {% include "os_div.html" %}
+</div>
+{% endfor %}
+
+
+{% for bool in pxelinuxcfgAdminVisible %}
+<h6>Edit Boot Configurations</h6>
+<div class="row">
+  <div class="large-4 columns">
+    <select class="medium" name="pxelinuxcfgselector" id="pxelinuxcfgselector" onchange="Dajaxice.linboweb.linboserver.pxelinuxcfgSelectionChanged(Dajax.process, {'selection':this.value});" size="1">
+      <option value="">Select...</option>
+      <option value="New">New PXE-Boot Configuration</option>
+      {% for pxelinuxcfg in pxelinuxcfgs %}
+      <option value="{{ pxelinuxcfg.name }}">{{ pxelinuxcfg.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>  
+<div id="pxelinuxcfgdiv" name="pxelinuxcfgdiv">
+  {% include "pxelinuxcfg_div.html" %}
+</div>
+{% endfor %}
+
+
+{% for bool in clientAdminVisible %}
+<h6>Edit Client Configurations</h6>
+<div class="row">
+  <div class="large-4 columns">
+    <select class="medium" name="clientselector" id="clientselector" onchange="Dajaxice.linboweb.linboserver.clientSelectionChanged(Dajax.process, {'selection':this.value});" size="1">
+      <option value="">Select...</option>
+      <option value="New">New Client Configuration</option>
+      {% for client in clients %}
+      <option value="{{ client.ip }}">{{ client.ip }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div id="clientdiv" name="clientdiv">
+  {% include "client_div.html" %}
+</div>
+{% endfor %}
+
+<!-- Zurb Foundation is unable to style dynamically added elements without this -->
+<script type="text/javascript">
+$(document).foundation('forms');
+</script>

@@ -1,0 +1,55 @@
+{% for bool in pxelinuxcfgDivVisible %}
+{% for bool in pxelinuxcfgDescrVisible %}
+
+{% for field in form.visible_fields %}
+{{ field.errors.as_ul }}
+
+{% if forloop.counter == 1 and pxelinuxcfgShowDelete == "1" %}
+<hr>
+{{ field.as_hidden }}
+{% endif %}
+{% if forloop.counter == 1 and pxelinuxcfgShowDelete != "1" %}
+<hr>
+<div class="row">
+  <div class="large-3 columns">
+    <p>Name</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 2 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Configuration</p>
+  </div>
+  <div class="large-7 columns left">
+    <p style="height:600px">{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 3 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Description</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+
+{% endfor %}
+<hr>
+{% endfor %}
+{% for bool in pxelinuxcfgShowDelete %}
+<input class="small button round" name="Delete" type="submit" value="Delete PXELINUXCFG" id="deletebutton" onclick="return remove_pxelinuxcfg();">
+{% endfor %}
+<input class="small button round" name="Save" type="submit" value="Save" id="savebutton" onclick="return save_pxelinuxcfg();">
+{% endfor %}
+<script type="text/javascript">
+$("#id_configuration").height("595px");
+$("#id_configuration").attr("resize","none");
+$(document).foundation('forms');
+</script>

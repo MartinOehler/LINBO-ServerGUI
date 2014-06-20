@@ -1,0 +1,56 @@
+{% for bool in partitionSelectionDivVisible %}
+<div id="partitionSelectionDiv">
+{% for bool in partitionSelectionDescrVisible %}
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Description</td>
+  </tr>  
+  <tr>
+   {% for field in form.visible_fields %}
+    {% if forloop.counter == 1 or forloop.counter == 4 %}
+     {{ field.errors.as_ul }}
+   <td>{{ field }}</td>
+    {% endif %}
+   {% endfor %}
+  </tr>
+</table>
+{% endfor %}
+{% if not partitionSelectionDescrVisible %}
+<input class="small button round" name="Delete" type="submit" value="Delete Partition Selection" id="deletebutton" onclick="return remove_partitionselection();">
+{% endif %}
+</div>
+<div id="partitionDiv">
+  {{ partitions.management_form }}
+  {{ partitions.non_form_errors.as_ul }}
+<table>
+   {% for form in partitions.forms %}
+     {{ form.id }}
+   {% if forloop.first %}
+   <tr>
+     <td>Name</td>
+     <td>Device</td>
+     <td>Size</td>
+     <td>Filesystem Type</td>
+     <td>Image Name</td>
+     <td>Bootable</td>
+     <td>Quicksync</td>
+     <td>Description</td>
+     <td>Delete</td>
+   </tr>
+   {% endif %}
+   <tr>
+     {% for field in form.visible_fields %}
+     {{ field.errors.as_ul }}
+     <td>{{ field }}</td>
+     {% endfor %}
+     <td>{% if not forloop.last %}<input class="small button round" name="Delete" type="submit" value="Delete" id="deletebutton" onclick="return remove_partition('{{ form.name.value }}');">{% endif %}</td>
+    </tr>
+   {% endfor %}
+</table>
+</div>
+<input class="small button round" name="Save" type="submit" value="Save" id="savebutton" onclick="return save_partitionselection();">
+{% endfor %}
+<script type="text/javascript">
+$(document).foundation('forms');
+</script>

@@ -1,0 +1,44 @@
+{% for bool in clientGroupDivVisible %}
+{% for bool in clientGroupDescrVisible %}
+
+<hr>
+<div class="row">
+  {% if clientGroupShowDelete != "1" %}
+  <div class="large-3 columns">
+    <p>Name</p>
+  </div>
+  {% endif %}
+  <div class="large-3 columns">
+    <p>Clients</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>Description</p>
+  </div>
+</div>
+<div class="row">
+  {% for field in form.visible_fields %}
+  {{ field.errors.as_ul }}
+  {% if forloop.first and clientGroupShowDelete == "1" %}
+  {{ field.as_hidden }}
+  {% else %}
+  {% if forloop.last %}
+  <div class="large-3 columns left">
+    {% else %}
+    <div class="large-3 columns">
+      {% endif %}
+  <p>{{ field }}</p>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <hr>
+  {% endfor %}
+{% for bool in clientGroupShowDelete %}
+<input class="small button round" name="Delete" type="submit" value="Delete Client Group" id="deletebutton" onclick="return remove_clientGroup();">
+{% endfor %}
+<input class="small button round" name="Save" type="submit" value="Save" id="savebutton" onclick="return save_clientGroup();">
+{% endfor %}
+<script type="text/javascript">
+$(document).foundation('forms');
+$("#id_members").multiselect();
+</script>

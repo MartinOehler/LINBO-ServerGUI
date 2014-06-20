@@ -1,0 +1,72 @@
+{% load dajaxice_templatetags %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+   <head>
+      <title>LINBO</title>
+      <link rel="stylesheet" href="{{ MEDIA_URL }}css/foundation.css">
+      <script src="{{ MEDIA_URL }}js/vendor/custom.modernizr.js"></script>
+      <script src="{{ STATIC_URL }}dajaxice.core.js"  type="text/javascript" charset="utf-8"></script>
+      <script src="{{ MEDIA_URL }}js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+      <script src="{{ MEDIA_URL }}js/jquery.dajax.core.js" type="text/javascript" charset="utf-8"></script>
+    
+      <script type="text/javascript" src="{{ MEDIA_URL }}js/linboserver_wizard.js"></script>
+   </head>
+   <body>
+     {% include "topbar.html" %}
+
+     <div class="row">
+       <div class="large-2 columns">
+	 <ul class="side-nav">
+      	   <li><a href="/linboweb/main/">Overview</a></li>
+	   <li class="active"><a href="/linboweb/wizard/">Client Wizard</a></li>
+	   <li class="divider"></li>
+	   <li><a href="/linboweb/imageadmin/">Image Administration</a></li>
+	   <li><a href="/linboweb/config/">Expert Configuration</a></li>
+	 </ul>
+       </div>
+
+       <div class="large-10 columns">
+	 <h3 class="boxmain">Quick Client Configuration</h3>
+	 <form action="" class="custom" method="post" id="clientform" onSubmit=""> 
+
+	   <div id="wizard" name="wizard">
+	     {% include "wizard_div.html" %}
+	   </div> 
+	 </form>
+       </div>
+
+     <script>
+      document.write('<script src=' +
+                              ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+                              '.js><\/script>')
+     </script>
+     
+     <script src="{{ MEDIA_URL }}js/foundation/foundation.js"></script>
+     <script src="{{ MEDIA_URL }}js/foundation/foundation.forms.js"></script>
+
+      <!--   
+          <script src="js/foundation/foundation.js"></script>
+          <script src="js/foundation/foundation.alerts.js"></script>
+          <script src="js/foundation/foundation.clearing.js"></script>
+          <script src="js/foundation/foundation.cookie.js"></script>
+          <script src="js/foundation/foundation.dropdown.js"></script>
+          <script src="js/foundation/foundation.forms.js"></script>
+          <script src="js/foundation/foundation.joyride.js"></script>
+          <script src="js/foundation/foundation.magellan.js"></script>
+          <script src="js/foundation/foundation.orbit.js"></script>
+          <script src="js/foundation/foundation.reveal.js"></script>
+          <script src="js/foundation/foundation.section.js"></script>
+          <script src="js/foundation/foundation.tooltips.js"></script>
+          <script src="js/foundation/foundation.topbar.js"></script>
+          <script src="js/foundation/foundation.interchange.js"></script>
+          <script src="js/foundation/foundation.placeholder.js"></script>
+          <script src="js/foundation/foundation.abide.js"></script>
+          
+          -->
+      
+     <script>
+        $(document).foundation();
+     </script>
+   </body>
+</html>

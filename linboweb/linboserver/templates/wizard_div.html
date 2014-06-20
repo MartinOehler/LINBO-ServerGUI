@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="large-4 columns">
+    <h5>Select Client Group</h5>
+    <select class="medium" name="clientgroupselector" id="clientgroupselector" size="1">
+      <option value="">Select...</option>
+      {% for clientgroup in clientgroups %}
+      <option value="{{ clientgroup.name }}">{{ clientgroup.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-4 columns">
+    <h5>Enter IP</h5>
+    <input class="medium" name="newclientip" id="newclientip" type="text" id="left-label">
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-4 columns">
+    <h5>Select Template</h5>
+    <select class="medium" name="templateselector" id="templateselector" size="1">
+      <option value="">Select...</option>
+      {% for template in templates %}
+      <option value="{{ template.description }}">{{ template.description }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-4 columns text-center">
+    <input class="small button round" name="Select" value="Create Client" id="createclientbutton" onClick="return createClientFromTemplate();"> 
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+        ServerName linbo.test.local
+        ServerAdmin root@linbo.test.local
+        
+        RewriteEngine on
+        RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+        <Directory /srv/www/site_media>
+               Order deny,allow
+               Allow from all
+        </Directory>
+
+       Alias   /site_media     /srv/www/site_media/
+       Alias   /static         /srv/www/site_media/
+
+       ErrorLog /var/log/apache2/linbo-error.log
+       LogLevel warn
+
+       CustomLog /var/log/apache2/linbo-access.log combined
+       ServerSignature On
+
+</VirtualHost>

@@ -1,0 +1,30 @@
+{% for clientgroup in clientgroups %}
+  <fieldset>
+    <legend>Client Group {{ clientgroup.description }}</legend>
+    <div class="row">
+      <div class="large-4 columns">
+	<p>Client</p>
+      </div>
+      <div class="large-3 columns left">
+	<p>Description</p>
+      </div>
+      <!-- div class="large-3 columns left">
+	<p>Start VNC Client</p>
+      </div-->
+    </div>
+    <hr>
+    {% for client in clientgroup.members.all %}
+    <div class="row">
+      <div class="large-4 columns">
+	<p>{{ client.ip }}</p>
+      </div>
+      <div class="large-3 columns left text-center">
+	<p>{{ client.description }}</p>
+      </div>
+      <!-- div class="large-1 columns left text-center">
+	<p><input class="tiny button round" type="button" value="Connect" onclick="window.open('http://192.168.101.147/site_media/noVNC/vnc.html?host={{ client.ip }}&port=5900')"/></p>
+      </div -->
+    </div>
+    {% endfor %}
+  </fieldset>
+{% endfor %}

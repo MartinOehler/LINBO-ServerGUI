@@ -1,0 +1,41 @@
+The following steps are necessary to install the LINBOv3 Server GUI
+inside a Linux System.
+
+ * Install and configure Apache 2 and mod wsgi. An example Apache 
+   configuration is provided in the conf subdirectory.
+
+ * The following python modules need to be installed on the server
+   system:
+
+     - Django (V1.5.4+)
+     - Django-Dajax
+     - Django-Dajaxice
+
+   Python pip should care for the dependencies. The file
+
+    djanco-static/dajaxice.core.js
+
+   must be copied to the Django static files directory.
+
+ * Copy the Foundation framework to 
+
+     MEDIA_URL/css (CSS part)
+     MEDIA_URL/js (JS part)
+
+ * Copy jquery, jquery.dajax.core.js and dajaxice.core.js to
+
+     MEDIA_URL/js
+   
+ * Copy the linboweb directory to the paths matching your wsgi 
+   configuration and adapt settings.py
+
+   SITE_MEDIA is located at /srv/www/site_media/
+   STATIC_URL is located at /srv/django/static
+
+ * Copy the wsgi-directory to 
+
+    /srv/django/
+
+   (check WSGIScriptAlias variable in site configuration).
+
+ * Change the database settings according to your installation.

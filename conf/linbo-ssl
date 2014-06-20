@@ -1,0 +1,37 @@
+NameVirtualHost *:443
+<VirtualHost *:443>
+        ServerName  linbo.test.local
+        ServerAdmin root@linbo.test.local
+
+        SSLEngine On
+        SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
+        SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+
+        RewriteEngine on
+        RewriteRule   ^/$  /linboweb/  [R]
+
+        <Directory /srv/www/site_media>
+                Order deny,allow
+                Allow from all
+        </Directory>
+
+        <Directory /srv/django/static>
+                Order deny,allow
+                Allow from all
+        </Directory>
+
+        Alias   /site_media     /srv/www/site_media/
+        Alias   /static         /srv/django/static/
+
+        ErrorLog /var/log/apache2/linbo-ssl-error.log
+        LogLevel warn
+
+        CustomLog /var/log/apache2/linbo-ssl-access.log combined
+        ServerSignature On
+
+        WSGIScriptAlias / /srv/django/wsgi/django.wsgi
+        WSGIProcessGroup linbo-django
+        WSGIDaemonProcess linbo-django user=www-data group=www-data threads=20
+
+</VirtualHost>
+

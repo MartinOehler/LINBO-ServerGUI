@@ -1,0 +1,134 @@
+{% for bool in osDivVisible %}
+{% for bool in osDescrVisible %}
+
+{% for field in form.visible_fields %}
+{{ field.errors.as_ul }}
+
+{% if forloop.counter == 1 %}
+<hr>
+<div class="row">
+  <div class="large-3 columns">
+    <p>OSid</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 2 and osShowDelete == "1" %}
+{{ field.as_hidden }}
+{% endif %}
+{% if forloop.counter == 2 and osShowDelete != "1" %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Name</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 3 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Bootmethod</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 4 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Boot</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 5 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Root</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 6 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Kernel</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 7 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Initrd</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 8 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Append</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 9 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Patches</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 10 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Partition Selections</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+{% if forloop.counter == 11 %}
+<div class="row">
+  <div class="large-3 columns">
+    <p>Description</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
+{% endif %}
+
+{% endfor %}
+<hr>
+{% endfor %}
+{% for bool in osShowDelete %}
+<input class="small button round" name="Delete" type="submit" value="Delete OS" id="deletebutton" onclick="return remove_os();">
+{% endfor %}
+<input class="small button round" name="Save" type="submit" value="Save" id="savebutton" onclick="return save_os();">
+{% endfor %}
+
+<script type="text/javascript">
+$("#id_partitionselection").attr("class","medium");
+$(document).foundation('forms');
+</script>

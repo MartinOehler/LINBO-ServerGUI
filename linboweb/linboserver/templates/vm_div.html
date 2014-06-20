@@ -1,0 +1,40 @@
+{% for bool in vmDivVisible %}
+{% for bool in vmDescrVisible %}
+<hr>
+<div class="row">
+  {% if not vmShowDelete %}
+  <div class="large-3 columns">
+    <p>Name</p>
+  </div>
+  {% endif %}
+  <div class="large-3 columns">
+    <p>Patches</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>Description</p>
+  </div>
+</div>
+<div class="row">
+  {% for field in form.visible_fields %}
+    {{ field.errors.as_ul }}
+      {% if vmShowDelete and forloop.first  %}
+        {{ field.as_hidden }}
+      {% else %}
+        {% if forloop.last %}
+  <div class="large-3 columns left">
+        {% else %}
+	<div class="large-3 columns">
+        {% endif %}
+	<p>{{ field }}</p>
+  </div>
+      {% endif %}
+  {% endfor %}
+
+</div>
+<hr>
+{% endfor %}
+{% for bool in vmShowDelete %}
+<input class="small button round" name="Delete" type="submit" value="Delete VM" id="deletebutton" onclick="return remove_vm();">
+{% endfor %}
+<input class="small button round" name="Save" type="submit" value="Save" id="savebutton" onclick="return save_vm();">
+{% endfor %}
