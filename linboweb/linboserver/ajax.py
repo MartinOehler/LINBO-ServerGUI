@@ -1176,7 +1176,7 @@ def createClientFromTemplate(request,
         if clientgroupselection!='' and clienttemplateselection!='' and ip!='':
 
             clientgroup=clientGroup.objects.get(name=clientgroupselection)
-            clienttemplate=client.objects.get(description=clienttemplateselection)
+            clienttemplate=client.objects.get(description=clienttemplateselection,template=1)
 
             try:
                 ipcheck=client.objects.filter(ip=ip)
