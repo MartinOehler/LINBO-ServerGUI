@@ -123,7 +123,14 @@
 </div>
 {% endif %}
 {% if forloop.counter == 13 %}
-{{ field.as_hidden }}
+<div class="row">
+  <div class="large-3 columns">
+    <p>TorrentEnabled</p>
+  </div>
+  <div class="large-3 columns left">
+    <p>{{ field }}</p>
+  </div>
+</div>
 {% endif %}
 {% if forloop.counter == 14 %}
 <div class="row">

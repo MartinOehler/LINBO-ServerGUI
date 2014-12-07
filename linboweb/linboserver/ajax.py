@@ -156,7 +156,11 @@ def exportClientConfiguration(request,
             f.write("AutoPartition = " + str(myclient.autopartition).replace('True','yes').replace('False','no') + "\n")
             f.write("AutoSync = " + str(myclient.autosync).replace('True','yes').replace('False','no') + "\n")
             f.write("InstallMBR  = " + str(myclient.installmbr).replace('True','yes').replace('False','no') + "\n")
-            f.write("TorrentEnabled = " + str(myclient.torrentenabled).replace('True','yes').replace('False','no') + "\n\n")
+            f.write("TorrentEnabled = " + str(myclient.torrentenabled).replace('True','yes').replace('False','no') + "\n")
+            if myclient.torrentenabled == True:
+                f.write("DownloadType = torrent\n\n")
+            else:
+                f.write("DownloadType = rsync\n\n")
 
             ipinhex=binascii.hexlify(socket.inet_aton(myclient.ip)).upper()
             filenamebootconf="/tftpboot/pxelinux.cfg/" + ipinhex
