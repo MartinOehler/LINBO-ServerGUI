@@ -1185,9 +1185,9 @@ def createClientFromTemplate(request,
             try:
                 ipcheck=client.objects.filter(ip=ip)
             except client.DoesNotExist:
-                ipcheck=None
+                ipcheck=1
 
-            if ipcheck==None:
+            if ipcheck.count() > 0:
                 dajax.alert("The IP already exists.")
             else:
                 newobj=deepcopy(clienttemplate)
