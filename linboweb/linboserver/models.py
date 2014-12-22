@@ -117,6 +117,9 @@ class client(models.Model):
     vms            = models.ManyToManyField(vm,blank=True)
     description    = models.CharField(max_length=300,blank=True)
 
+    class Meta:
+        ordering = ['ip']
+
     def __unicode__(self):
         return self.ip;
 

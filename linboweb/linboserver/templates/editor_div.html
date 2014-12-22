@@ -24,7 +24,7 @@
       <option value="">Select...</option>
       <option value="New">New VM</option>
       {% for vm in vms %}
-      <option value="{{ vm.name }}">{{ vm.name }}</option>
+      <option value="{{ vm.name }}">{{ vm.name }} {{vm.description}}</option>
       {% endfor %}
     </select>
   </div>
@@ -43,7 +43,7 @@
       <option value="">Select...</option>
       <option value="New">New Client Group</option>
       {% for clientGroup in clientGroups %}
-      <option value="{{ clientGroup.name }}">{{ clientGroup.name }}</option>
+      <option value="{{ clientGroup.name }}">{{ clientGroup.name }} {{clientGroup.description }}</option>
       {% endfor %}
     </select>
   </div>
@@ -62,7 +62,7 @@
       <option value="">Select...</option>
       <option value="New">New Operating System</option>
       {% for os in oss %}
-      <option value="{{ os.name }}">{{ os.name }}</option>
+      <option value="{{ os.name }}">{{ os.name }} {{os.description}}</option>
       {% endfor %}
     </select>
   </div>
@@ -77,11 +77,11 @@
 <h6>Edit Boot Configurations</h6>
 <div class="row">
   <div class="large-4 columns">
-    <select class="medium" name="pxelinuxcfgselector" id="pxelinuxcfgselector" onchange="Dajaxice.linboweb.linboserver.pxelinuxcfgSelectionChanged(Dajax.process, {'selection':this.value});" size="1">
+    <select class="medium" name="pxelinuxcfgselector" id="pxelinuxcfgselector" onchange="Dajaxice.linboweb.linboserver.pxelinuxcfgSelectionChanged(Dajax.process, {'selection':this.value});" size="1" width="200">
       <option value="">Select...</option>
       <option value="New">New PXE-Boot Configuration</option>
       {% for pxelinuxcfg in pxelinuxcfgs %}
-      <option value="{{ pxelinuxcfg.name }}">{{ pxelinuxcfg.name }}</option>
+      <option value="{{ pxelinuxcfg.name }}">{{ pxelinuxcfg.name }} {{pxelinuxcfg.description}}</option>
       {% endfor %}
     </select>
   </div>
@@ -100,7 +100,7 @@
       <option value="">Select...</option>
       <option value="New">New Client Configuration</option>
       {% for client in clients %}
-      <option value="{{ client.ip }}">{{ client.ip }}</option>
+      <option value="{{ client.ip }}">{{ client.ip }} {{client.description }}</option>
       {% endfor %}
     </select>
   </div>
