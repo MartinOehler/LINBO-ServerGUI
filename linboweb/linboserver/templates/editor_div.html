@@ -100,7 +100,7 @@
       <option value="">Select...</option>
       <option value="New">New Client Configuration</option>
       {% for client in clients %}
-      <option value="{{ client.ip }}">{{ client.ip }} {{client.description }}</option>
+      <option value="{{ client.ipaddr }}">{{ client.ipaddr }} {{client.description }}</option>
       {% endfor %}
     </select>
   </div>

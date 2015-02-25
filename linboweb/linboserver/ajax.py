@@ -48,12 +48,25 @@ from copy import deepcopy
 
 import binascii
 import socket
+import struct
 import os
 import subprocess
 import shlex
 import re
 from subprocess import call
 from array import *
+
+def ipToInteger(ip):
+    ip = unicode(ip)
+    try:
+        return struct.unpack('!I', socket.inet_pton(socket.AF_INET, ip))[0]
+    except socket.error:
+        try:
+            hi, lo = struct.unpack('!QQ', socket.inet_pton(socket.AF_INET6, ip))
+            return (hi << 64) | lo
+        except socket.error:
+            return 0
+
 
 @csrf_exempt
 @login_required
@@ -141,8 +154,13 @@ def exportClientConfiguration(request,
     # get all client groups
     for clientgroup in clientGroup.objects.all():
         for myclient in clientgroup.members.all():
+            
+            # update client order
+            myclient.ipaddrint = ipToInteger(myclient.ipaddr)
+            myclient.save()
+
             # open the file
-            filename="/srv/linbo/cache/start.conf-" + myclient.ip
+            filename="/srv/linbo/cache/start.conf-" + myclient.ipaddr
             f=open(filename,'w')
 
             # write header of general LINBO section
@@ -162,7 +180,7 @@ def exportClientConfiguration(request,
             else:
                 f.write("DownloadType = rsync\n\n")
 
-            ipinhex=binascii.hexlify(socket.inet_aton(myclient.ip)).upper()
+            ipinhex=binascii.hexlify(socket.inet_aton(myclient.ipaddr)).upper()
             filenamebootconf="/tftpboot/pxelinux.cfg/" + ipinhex
             pxe=open(filenamebootconf,'w')
             pxe.write(myclient.pxelinuxconfiguration.configuration)
@@ -1055,7 +1073,7 @@ def clientSelectionChanged(request,
                                     'clientShowDelete':''})
         
     if selection != 'New' and selection != '':
-        selectedClient = client.objects.get(ip=selection)
+        selectedClient = client.objects.get(ipaddr=selection)
 
         form=clientForm(instance=selectedClient)
 
@@ -1080,7 +1098,7 @@ def remove_client(request,
 
     if request.POST:
         try:
-            clientselection=client.objects.get(ip=selectedclient)
+            clientselection=client.objects.get(ipaddr=selectedclient)
         except client.DoesNotExist:
             clientselection=None
 
@@ -1115,12 +1133,12 @@ def save_client(request,
         if option == 'Save':
             deserialized_form = deserialize_form(dataclient)
 
-            clientip=deserialized_form.get("ip")
+            clientip=deserialized_form.get("ipaddr")
 
             # check whether the client already exists
             clientsearch=''
             try:
-                clientsearch=client.objects.get(ip=clientip)
+                clientsearch=client.objects.get(ipaddr=clientip)
             except client.DoesNotExist:
                 clientsearch=None
 
@@ -1171,19 +1189,19 @@ def save_client(request,
 def createClientFromTemplate(request,
                              clientgroupselection,
                              clienttemplateselection,
-                             ip):
+                             ipaddr):
 
     dajax = Dajax()
     print "createclientfromtemplate entered"
 
     if request.POST:
-        if clientgroupselection!='' and clienttemplateselection!='' and ip!='':
+        if clientgroupselection!='' and clienttemplateselection!='' and ipaddr!='':
 
             clientgroup=clientGroup.objects.get(name=clientgroupselection)
             clienttemplate=client.objects.get(description=clienttemplateselection,template=1)
 
             try:
-                ipcheck=client.objects.filter(ip=ip)
+                ipcheck=client.objects.filter(ipaddr=ipaddr)
             except client.DoesNotExist:
                 ipcheck=1
 
@@ -1199,7 +1217,7 @@ def createClientFromTemplate(request,
                 # newobj.date=
                 # this is not a template
                 newobj.template=False
-                newobj.ip=ip
+                newobj.ipaddr=ipaddr
                 newobj.description=''
                 newobj.save()
                 new_osentries=clienttemplate.osentries.all()

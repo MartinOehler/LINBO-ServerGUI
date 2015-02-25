@@ -101,7 +101,8 @@ class pxelinuxcfg(models.Model):
 # it has a timestamp to allow a backup via a copy operation
 class client(models.Model):
     date           = models.BigIntegerField(default=int(format(datetime.now(), u'U')))
-    ip             = models.CharField(max_length=20)
+    ipaddr         = models.GenericIPAddressField(default='127.0.0.1')
+    ipaddrint      = models.BigIntegerField(default=0)
     pxelinuxconfiguration = models.ForeignKey(pxelinuxcfg,blank=True)
     osentries      = models.ManyToManyField(os,blank=True)
     server         = models.CharField(max_length=20)
@@ -118,10 +119,10 @@ class client(models.Model):
     description    = models.CharField(max_length=300,blank=True)
 
     class Meta:
-        ordering = ['ip']
+        ordering = ['ipaddrint']
 
     def __unicode__(self):
-        return self.ip;
+        return self.ipaddr;
 
 
 class clientGroup(models.Model):
@@ -136,7 +137,7 @@ class diskAdmin(admin.ModelAdmin):
     list_display = ( 'device', )
 
 class clientAdmin(admin.ModelAdmin):
-    list_display = ( 'ip', )
+    list_display = ( 'ipaddr', )
 
 class clientGroupAdmin(admin.ModelAdmin):
     list_display = ( 'description', )

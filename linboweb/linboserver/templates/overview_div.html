@@ -16,13 +16,13 @@
     {% for client in clientgroup.members.all %}
     <div class="row">
       <div class="large-4 columns">
-	<p>{{ client.ip }}</p>
+	<p>{{ client.ipaddr }}</p>
       </div>
       <div class="large-3 columns left text-center">
 	<p>{{ client.description }}</p>
       </div>
       <!-- div class="large-1 columns left text-center">
-	<p><input class="tiny button round" type="button" value="Connect" onclick="window.open('http://192.168.101.147/site_media/noVNC/vnc.html?host={{ client.ip }}&port=5900')"/></p>
+	<p><input class="tiny button round" type="button" value="Connect" onclick="window.open('http://192.168.101.147/site_media/noVNC/vnc.html?host={{ client.ipaddr }}&port=5900')"/></p>
       </div -->
     </div>
     {% endfor %}
